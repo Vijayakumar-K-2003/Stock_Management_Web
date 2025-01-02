@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Stock Management System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 20px;
+        }
+
+        div {
+            width: 90%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Add Product Link Styling */
+        a[th\\:href="@{/showNewProductForm}"] {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        a[th\\:href="@{/showNewProductForm}"]:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead th {
+            background-color: #007bff;
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+        }
+
+        tbody td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        tbody td a {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+            color: white;
+            text-align: center;
+        }
+
+        tbody td a:first-of-type {
+            background-color: #007bff; /* Blue for Update button */
+        }
+
+        tbody td a:first-of-type:hover {
+            background-color: #0056b3;
+        }
+
+        tbody td a:last-of-type {
+            background-color: #f44336; /* Red for Delete button */
+        }
+
+        tbody td a:last-of-type:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Products List</h1>
+        <a th:href="@{/showNewProductForm}">Add Product</a>
+        <table>
+            <thead>
+                <tr>
+					
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Product Quantity</th>
+                    <th>Product Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="products : ${listProducts}">
+					
+					<td th:text="${products.product_name}"></td>
+                    <td th:text="${products.category}"></td>
+                    <td th:text="${products.quantity}"></td>
+                    <td th:text="${products.price}"></td>
+                    <td>
+                        <a th:href="@{/showFormForUpdate/{id}(id=${products.id})}">Update</a>
+                        <a th:href="@{/deleteProduct/{id}(id=${products.id})}">Delete</a>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
